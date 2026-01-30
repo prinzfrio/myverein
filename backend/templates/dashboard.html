@@ -1,14 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Willkommen im Dashboard!</h1>
+{% extends "layout.html" %}
 
-    <p>Du bist eingeloggt.</p>
+{% block title %}Dashboard{% endblock %}
 
-    <a href="/logout">Logout</a>
-</body>
-</html>
+{% block content %}
+<h2 class="mb-4">Vereins-Dashboard</h2>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title d-flex align-items-center">
+                    <span class="me-2">👥</span> Mitglieder
+                </h5>
+                <p class="card-text">Mitglieder anzeigen, bearbeiten oder neue hinzufügen.</p>
+                <a href="/mitglieder" class="btn btn-primary w-100">Öffnen</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title d-flex align-items-center">
+                    <span class="me-2">📅</span> Termine
+                </h5>
+                <p class="card-text">Termine verwalten und neue Veranstaltungen anlegen.</p>
+                <a href="/termine" class="btn btn-primary w-100">Öffnen</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title d-flex align-items-center">
+                    <span class="me-2">📥</span> Import
+                </h5>
+                <p class="card-text">Daten aus ProWinner importieren.</p>
+                <a href="/import" class="btn btn-primary w-100">Öffnen</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

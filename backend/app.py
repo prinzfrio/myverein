@@ -31,13 +31,6 @@ if __name__ == "__main__":
 
 
 
-@app.get("/dashboard")
-def dashboard():
-    if "user_id" not in session:
-        return redirect(url_for("login.login_page"))
-    return render_template("dashboard.html")
-
-
 @app.get("/logout")
 def logout():
     session.pop("user_id", None)
