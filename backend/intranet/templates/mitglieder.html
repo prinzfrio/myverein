@@ -24,9 +24,9 @@
             <tbody id="memberTable">
                 {% for m in mitglieder %}
                 <tr>
-                    <td>{{ m.name }}</td>
+                    <td>{{ m.vorname }} {{ m.nachname }}</td>
                     <td>{{ m.email }}</td>
-                    <td>{{ m.telefon }}</td>
+                    <td>telefon</td>
                     <td>
                         <a href="/mitglieder/{{ m.id }}/edit" class="btn btn-sm btn-outline-primary">✏️</a>
                         <a href="/mitglieder/{{ m.id }}/delete" class="btn btn-sm btn-outline-danger">🗑️</a>

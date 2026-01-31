@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
+
 from ..models import Mitglied
 from ..db import db
 
@@ -69,3 +70,9 @@ def delete_mitglied(id):
 
     return jsonify({"message": "Mitglied gelöscht"})
 
+
+# HTML-Seite: Mitglieder anzeigen
+@mitglieder_bp.get("/mitglieder")
+def mitglieder_page():
+    alle = Mitglied.query.all()
+    return render_template("mitglieder.html", mitglieder=alle)
