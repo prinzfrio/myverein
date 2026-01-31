@@ -1,2 +1,0 @@
-# sorgt dafür, dass intranet als Unterpaket erkannt wird
-from . import intranet

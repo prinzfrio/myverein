@@ -1,13 +1,13 @@
 from flask import Flask
 from flask import render_template, session, redirect, url_for
-from .intranet import db
-from .intranet.routes.login import login_bp
-from .intranet.routes.mitglieder import mitglieder_bp
-from .intranet.routes.termine import termine_bp
-from .intranet.routes.import_prowinner import import_bp
-from .intranet.routes.ping import ping_bp
-from .intranet.routes.dashboard import dashboard_bp
-from .intranet.routes.auth import auth_bp
+from backend.intranet import db
+from backend.intranet.routes.login import login_bp
+from backend.intranet.routes.mitglieder import mitglieder_bp
+from backend.intranet.routes.termine import termine_bp
+from backend.intranet.routes.import_prowinner import import_bp
+from backend.intranet.routes.ping import ping_bp
+from backend.intranet.routes.dashboard import dashboard_bp
+from backend.intranet.routes.auth import auth_bp
 
 
 app = Flask(__name__)
@@ -24,15 +24,16 @@ app.register_blueprint(ping_bp)
 app.register_blueprint(dashboard_bp)
 app.register_blueprint(auth_bp)
 
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
-
-
+@app.get("/")
+def index():
+    return redirect("/login")
 
 @app.get("/logout")
 def logout():
     session.pop("user_id", None)
     return redirect(url_for("login.login_page"))
 
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
