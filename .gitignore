@@ -1,2 +1,18 @@
-venv/
+# Ablage
 Ablage/
+
+# Python Bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLite DB (falls du sie nicht versionieren willst)
+#*.db
+
+# Virtual environments
+venv/
+env/
+
+# PythonAnywhere specific
+*.log
