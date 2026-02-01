@@ -130,8 +130,23 @@
     </style>
 </head>
 
-<body class="{% if request.endpoint in ['login.login_page', 'login.logout'] %}no-sidebar{% endif %}">
-{% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
+<body class="{% if request.endpoint in ['login.login_page', 'login.logout', 'auth.register_page'] %}no-sidebar{% endif %}">
+<!--
+    {% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
+-->
+{% if current_user.is_authenticated %}
+
+<button class="toggle-btn" id="toggleBtn">☰</button>
+<div class="sidebar" id="sidebar"> ... </div>
+{% endif %}
+
+{% if not current_user.is_authenticated %}
+<div style="position: fixed; top: 10px; right: 10px; z-index: 6000;">
+    <a href="/login" class="btn btn-primary btn-sm">Login</a>
+</div>
+{% endif %}
+
+
 
 <div class="text-center mb-3">
     <img src="/static/img/logo.png" style="width: 120px; border-radius: 2px;">

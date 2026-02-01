@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Termine{% endblock %}
+
+{% block content %}
+<h2>Termine</h2>
+
+{% if termine|length == 0 %}
+    <p>Keine Termine vorhanden.</p>
+{% else %}
+    <ul>
+        {% for t in termine %}
+            <li>
+                <strong>{{ t.titel }}</strong><br>
+                Datum: {{ t.datum }}<br>
+                {% if t.uhrzeit %}
+                    Uhrzeit: {{ t.uhrzeit }}<br>
+                {% endif %}
+                {% if t.ort %}
+                    Ort: {{ t.ort }}<br>
+                {% endif %}
+                {% if t.intern %}
+                    <span style="color:red;">(intern)</span>
+                {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

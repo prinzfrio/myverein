@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
-
 from ..models import Mitglied
 from ..db import db
+from backend.intranet.auth.roles import role_required
+
 
 mitglieder_bp = Blueprint("mitglieder", __name__)
 
