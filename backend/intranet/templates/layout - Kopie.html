@@ -25,7 +25,8 @@
             background: #343a40;
             color: white;
             box-shadow: 2px 0 8px rgba(0,0,0,0.15);
-            padding-top: 60px;
+            /* padding-top: 1rem; */
+            padding-top: 60px; /* Platz für den Hamburger-Button */
             transition: transform 0.3s ease;
             z-index: 999;
         }
@@ -50,6 +51,7 @@
         .sidebar a:hover {
             background: #3f474e;
             color: #fff;
+            transition: 0.2s;
         }
 
         .sidebar .title {
@@ -58,7 +60,18 @@
             letter-spacing: 0.5px;
         }
 
-        /* Topbar */
+        .topbar2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: transparent; /* statt #343a40 */
+            color: white;
+            z-index: 5000;
+        }
+
+
         .topbar {
             position: fixed;
             top: 0;
@@ -67,24 +80,27 @@
             height: 50px;
             background: transparent;
             z-index: 5000;
+
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center; /* ← sorgt für gleiche Höhe */
             padding: 0 12px;
         }
+
 
         /* Content */
         .content {
             margin-left: 240px;
             padding: 2rem;
-            padding-top: 10px;
+            padding-top: 10px; /* Abstand für den Hamburger-Button */
             transition: margin-left 0.3s ease;
         }
 
         .no-sidebar .content {
             margin-left: 0;
-            padding-top: 40px;
+            padding-top: 40px; /* etwas Luft, aber kein Hamburger */
         }
+
 
         .content.expanded {
             margin-left: 0;
@@ -92,10 +108,10 @@
 
         /* Toggle Button */
         .toggle-btn {
-            z-index: 5000;
+            z-index: 5000; /* garantiert über der Sidebar */
             background: #343a40;
             color: white;
-            border: 2px solid #ffffffaa;
+            border: 2px solid #ffffffaa; /* halbtransparenter weißer Rand */
             border-radius: 4px;
             cursor: pointer;
             padding: 6px 10px;
@@ -113,34 +129,35 @@
             }
             .content {
                 margin-left: 0;
-                padding-top: 70px;
+                padding-top: 70px; /* Abstand bleibt bestehen */
             }
         }
 
         @media (max-width: 576px) {
             body {
-                padding-top: 100px;
+                padding-top: 100px; /* mehr Platz für Logo + Hamburger */
             }
 
             .text-center.mb-3 img {
-                margin-top: 20px;
+                margin-top: 20px; /* optional: Logo weiter nach unten */
             }
-
             .sidebar {
-                padding-top: 120px;
+                padding-top: 120px; /* statt 60px */ 
             }
-
+             /* topbar weiter nach unten */
             .topbar {
                 top: 40px;
             }
+            
         }
+
     </style>
 </head>
 
 
-<body class="{% if request.endpoint in ['login.login_page', 'login.logout', 'auth.register_page'] %}no-sidebar{% endif %}">
+<body class="{% if request.endpoint in ['auth.login', 'auth.logout', 'auth.register'] %}no-sidebar{% endif %}">
 
-{% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
+{% if request.endpoint not in ['auth.login', 'auth.logout', 'auth.register'] %}
 <div class="topbar d-flex justify-content-between align-items-center px-3">
     <button class="toggle-btn" id="toggleBtn">☰</button>
 
@@ -152,11 +169,14 @@
 </div>
 {% endif %}
 
+
 <div class="text-center mb-3">
     <img src="/static/img/logo.png" style="width: 120px; border-radius: 2px;">
 </div>
 
-{% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
+
+
+{% if request.endpoint not in ['auth.login', 'auth.logout', 'auth.register'] %}
 <div class="sidebar" id="sidebar">
     <div class="title">Mein Verein</div>
 
@@ -173,7 +193,9 @@
 </div>
 {% endif %}
 
-<!-- Flash-Meldungen -->
+
+
+<!-- Flash-Meldungen müssen HIER stehen -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <div class="container mt-3">
@@ -187,11 +209,14 @@
   {% endif %}
 {% endwith %}
 
+
+<!-- Danach kommt der Seiteninhalt -->
 <div class="content" id="content">
     {% block content %}{% endblock %}
 </div>
 
-{% if request.endpoint not in ['auth.login', 'auth.logout', 'auth.register'] %}
+
+{% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
 <script>
     document.getElementById("toggleBtn").addEventListener("click", function () {
         const sidebar = document.getElementById("sidebar");
@@ -205,6 +230,7 @@
     });
 </script>
 {% endif %}
+
 
 </body>
 </html>
