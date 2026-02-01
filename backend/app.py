@@ -15,7 +15,7 @@ from backend.intranet.routes.auth import auth_bp
 app = Flask(__name__, template_folder="intranet/templates")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///myverein.db"
-app.config["SECRET_KEY"] = "irgendein_geheimer_schlüssel"
+app.config["SECRET_KEY"] = "irgendein_geheimer_schlüssel_habe_ich_mir_ueberlegt!"
 
 db.init_app(app)
 

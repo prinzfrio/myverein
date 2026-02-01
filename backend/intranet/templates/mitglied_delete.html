@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Mitglied löschen{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Mitglied löschen</h2>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+
+        <p>Möchtest du das Mitglied  
+           <strong>{{ m.vorname }} {{ m.nachname }}</strong>  
+           wirklich löschen?</p>
+
+        <form method="POST" class="mt-3">
+            <button class="btn btn-danger">Ja, löschen</button>
+            <a href="/mitglieder" class="btn btn-secondary">Abbrechen</a>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
