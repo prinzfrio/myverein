@@ -59,7 +59,7 @@ app.register_blueprint(auth_bp)
 
 @app.get("/")
 def index():
-    return redirect("/login")
+    return redirect("/")
 
 @app.get("/logout")
 def logout():

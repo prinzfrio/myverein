@@ -60,6 +60,33 @@
             letter-spacing: 0.5px;
         }
 
+        .topbar2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: transparent; /* statt #343a40 */
+            color: white;
+            z-index: 5000;
+        }
+
+
+        .topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            z-index: 5000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* ← sorgt für gleiche Höhe */
+            padding: 0 12px;
+        }
+
         /* Content */
         .content {
             margin-left: 240px;
@@ -80,16 +107,14 @@
 
         /* Toggle Button */
         .toggle-btn {
-            position: fixed;
-            top: 10px;
-            left: 10px; /* wieder links */
             z-index: 5000; /* garantiert über der Sidebar */
             background: #343a40;
             color: white;
             border: 2px solid #ffffffaa; /* halbtransparenter weißer Rand */
-            padding: 10px 14px;
             border-radius: 4px;
             cursor: pointer;
+            padding: 6px 10px;
+            font-size: 20px;
         }
 
         @media (max-width: 992px) {
@@ -131,14 +156,20 @@
 </head>
 
 <body class="{% if request.endpoint in ['login.login_page', 'login.logout', 'auth.register_page'] %}no-sidebar{% endif %}">
+
+<div class="topbar d-flex justify-content-between align-items-center px-3">
+    <button class="toggle-btn" id="toggleBtn">☰</button>
+    {% if current_user.is_authenticated %}
+        <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+    {% else %}
+        <a href="/login" class="btn btn-outline-light btn-sm">Login</a>
+    {% endif %}
+</div>
+
 <!--
     {% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
 -->
-{% if current_user.is_authenticated %}
 
-<button class="toggle-btn" id="toggleBtn">☰</button>
-<div class="sidebar" id="sidebar"> ... </div>
-{% endif %}
 
 {% if not current_user.is_authenticated %}
 <div style="position: fixed; top: 10px; right: 10px; z-index: 6000;">
@@ -152,7 +183,6 @@
     <img src="/static/img/logo.png" style="width: 120px; border-radius: 2px;">
 </div>
 
-<button class="toggle-btn" id="toggleBtn">☰</button>
 
 <div class="sidebar" id="sidebar">
     <div class="title">Mein Verein</div>
