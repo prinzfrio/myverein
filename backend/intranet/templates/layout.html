@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <div class="text-center mb-3">
-        <img src="/static/img/logo.png" style="width: 120px; border-radius: 2px;">
-    </div>
+
     <title>{% block title %}Mein Verein{% endblock %}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +64,7 @@
         .content {
             margin-left: 240px;
             padding: 2rem;
-            padding-top: 70px; /* Abstand für den Hamburger-Button */
+            padding-top: 10px; /* Abstand für den Hamburger-Button */
             transition: margin-left 0.3s ease;
         }
 
@@ -109,14 +107,35 @@
             }
         }
 
+        @media (max-width: 576px) {
+            body {
+                padding-top: 100px; /* mehr Platz für Logo + Hamburger */
+            }
+
+            .text-center.mb-3 img {
+                margin-top: 20px; /* optional: Logo weiter nach unten */
+            }
+            .sidebar {
+                padding-top: 120px; /* statt 60px */ 
+            }
+            /* Hamburger-Button weiter nach unten */
+            .toggle-btn {
+                top: 40px;
+            }
+ 
+            
+        }
+
 
     </style>
 </head>
 
 <body class="{% if request.endpoint in ['login.login_page', 'login.logout'] %}no-sidebar{% endif %}">
-
-
 {% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
+
+<div class="text-center mb-3">
+    <img src="/static/img/logo.png" style="width: 120px; border-radius: 2px;">
+</div>
 
 <button class="toggle-btn" id="toggleBtn">☰</button>
 
@@ -134,10 +153,26 @@
 </div>
 {% endif %}
 
+<!-- Flash-Meldungen müssen HIER stehen -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
 
+
+<!-- Danach kommt der Seiteninhalt -->
 <div class="content" id="content">
     {% block content %}{% endblock %}
 </div>
+
 
 {% if request.endpoint not in ['login.login_page', 'login.logout', 'auth.register_page'] %}
 <script>

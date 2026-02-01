@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Neues Mitglied{% endblock %}
+
+{% block content %}
+<h2>Neues Mitglied anlegen</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Vorname</label>
+        <input name="vorname" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nachname</label>
+        <input name="nachname" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">E-Mail</label>
+        <input name="email" type="email" class="form-control" required>
+    </div>
+
+    <button class="btn btn-primary">Speichern</button>
+    <a href="/mitglieder" class="btn btn-secondary">Abbrechen</a>
+</form>
+{% endblock %}

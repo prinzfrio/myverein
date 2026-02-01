@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Mitglied bearbeiten{% endblock %}
+
+{% block content %}
+<h2>Mitglied bearbeiten</h2>
+
+<form method="POST">
+    <div class="mb-3">
+        <label class="form-label">Vorname</label>
+        <input name="vorname" class="form-control" value="{{ m.vorname }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nachname</label>
+        <input name="nachname" class="form-control" value="{{ m.nachname }}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">E-Mail</label>
+        <input name="email" class="form-control" value="{{ m.email }}">
+    </div>
+
+    <button class="btn btn-primary">Speichern</button>
+    <a href="/mitglieder" class="btn btn-secondary">Abbrechen</a>
+</form>
+{% endblock %}
